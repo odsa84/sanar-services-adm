@@ -1,0 +1,25 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-title>Enviar Mensaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="inputForm">
+    <ion-label>Destinatario: +593 {{ telefono }}</ion-label>
+    <ion-textarea type="text" rows="6" placeholder="Entre un mensaje..." 
+    formControlName="textareaName" ></ion-textarea>
+  </form>  
+    <ion-row class="top-20">
+      <ion-col>
+          <ion-button (click)="sendSMS()" class="top-20, tamanio" fill="solid" [disabled]="!inputForm.valid">
+            Enviar
+          </ion-button>
+      </ion-col>
+      <ion-col>
+          <ion-button (click)="dismiss()" class="top-20, tamanio" fill="outline">
+            Cancelar
+          </ion-button>
+      </ion-col>
+    </ion-row>
+</ion-content>

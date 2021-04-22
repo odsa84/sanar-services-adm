@@ -1,0 +1,33 @@
+<ion-app>
+    
+    <app-menu></app-menu>
+    
+    <!--<app-menu></app-menu>
+
+    <ion-menu contentId="content" side="start">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-avatar>
+              <img src="../assets/shapes.svg">
+            </ion-avatar>
+          </ion-buttons>
+          <ion-title>{{ menuTitle }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item (click)="crearServicio()">
+            <ion-icon slot="start" ios="ios-add" md="md-add"></ion-icon>
+            Crear servicio
+
+          </ion-item>
+          <ion-item (click)="logout()">
+              <ion-icon name="log-out" slot="start" (click)="logout()"></ion-icon>
+              Cerrar sesion
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>-->
+    <ion-router-outlet id="content" main></ion-router-outlet>
+  </ion-app>

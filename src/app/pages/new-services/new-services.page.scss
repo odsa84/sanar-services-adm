@@ -1,0 +1,43 @@
+ion-textarea{
+    border: solid 1px #cccccc;
+    height: 50%;
+    border-radius: 3%;
+    margin-bottom: 5%
+ }
+ ion-select{
+    border: solid 1px #cccccc;
+    height: 50%;
+    border-radius: 3%;
+    margin-bottom: 5%;
+ }
+ion-input {
+    border: solid 1px #cccccc;
+    margin-bottom: 5%
+}
+ion-datetime {
+    border: solid 1px #cccccc;
+    margin-bottom: 5%
+}
+.img-services {
+    height: 80px;
+    width: 80px;
+}
+
+.img-categories {
+    height: 90px;
+    width: 90px;
+}
+
+.img-main {    
+    width: 350px;
+    height: 400px;
+}
+
+ion-card img {
+    margin: auto !important;
+    width: 15vw !important;
+    height: 15vw !important;
+    border-radius: 50% !important; // half for rounding */
+    object-fit: cover !important; /* Scale the image - Center and crop image*/
+    object-position: center !important; /* Center the image within the element - Center and crop image*/
+}

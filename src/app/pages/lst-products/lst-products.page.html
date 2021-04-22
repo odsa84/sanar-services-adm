@@ -1,0 +1,51 @@
+<ion-header>  
+  <ion-toolbar mode="ios" class="header-style">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/adm-services"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="margin-top: 2%;">Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scrollEvents="true">
+  <ion-list-header>
+    <ion-segment scrollable color="primary" (ionChange)="segmentChanged($event)" 
+    mode="md" [value]="segmenTodo"> 
+      <ion-segment-button checked [value]="segmenTodo" (click)="getProductosByServicio()">
+        <ion-label>Todo</ion-label>
+      </ion-segment-button>
+      <ion-segment-button *ngFor="let item of items; let i = index;" [value]="item.name" 
+      (click)="getProductosByServTipoProducto(item.id)">
+        <ion-label>{{ item.name }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-list-header>
+
+    <ion-list>
+      <ion-item *ngFor="let prd of productos | async" 
+      class="ion-item-border" button>
+        <ion-thumbnail slot="start" class="img-services" (click)="editarProducto(prd)">
+          <ion-img [src]="prd.imagen" class="img-avatar"></ion-img>
+        </ion-thumbnail>
+        <ion-label (click)="editarProducto(prd)">
+          <h3>{{ prd.nombre }}</h3>
+          <p>{{ prd.descripcion }}         
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="crearProducto()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+</ion-content>
+
+<!--<ion-footer class="ion-no-border">
+  <ion-toolbar text-center no-border transparent>
+  </ion-toolbar>
+</ion-footer>-->

@@ -1,0 +1,28 @@
+<ion-header class="header">
+  <ion-toolbar mode="ios" class="header-style">
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="margin-top: 2%;">Administrar Servicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scrollEvents="true">
+    <ion-list>
+      <ion-item *ngFor="let serv of servicios | async" 
+      class="ion-item-border" button>
+        <ion-thumbnail slot="start" class="img-services" (click)="mostrarProductos(serv)">
+          <ion-img [src]="serv.imagen" class="img-avatar"></ion-img>
+        </ion-thumbnail>
+        <ion-label (click)="mostrarProductos(serv)">
+          <h3>{{ serv.nombre }}</h3>
+          <p>{{ serv.descripcion }}</p>
+          <ion-label slot="end" text-right>
+              {{ serv.sector.nombre }},
+              {{ serv.sector.ciudad.nombre }}
+          </ion-label>          
+        </ion-label>
+        <ion-fab-button color="light" size="small" (click)="detalleServicio(serv)"><ion-icon name="create"></ion-icon></ion-fab-button>
+      </ion-item>
+    </ion-list>
+</ion-content>

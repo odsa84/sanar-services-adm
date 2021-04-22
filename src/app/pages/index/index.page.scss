@@ -1,0 +1,29 @@
+.ion-item-border {
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 1% !important;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    box-shadow: 10px 5px 10px grey;
+}
+.card-title {
+    font-size: 1em;
+}
+.vertical-align-content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100%;
+}
+
+ion-content.background {
+    --background: url(../../../assets/index-bkg.jpg) 0 0/100% 100% no-repeat;
+}
+ion-row {
+    --background: rgba(0,0,0,0)!important;
+    --border-color: rgba(0,0,0,0)!important;
+}
+ion-col {
+    --background: rgba(0,0,0,0)!important;
+    --border-color: rgba(0,0,0,0)!important;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "sanar-services-front",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

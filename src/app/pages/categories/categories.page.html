@@ -1,0 +1,39 @@
+<app-header [titulo]=titulo></app-header>
+
+<!--<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let c of categorias" [routerLink]="c.redirectTo" detail>
+      <ion-icon slot="start" [name]="c.icon"></ion-icon>
+      <ion-label>{{ c.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>-->
+
+<ion-content padding fullscreen>
+
+  <ion-grid fixed>
+
+    <ion-row>
+      <ion-col  size="6" size-lg="3" 
+                size-md="4" size-sm="6"
+                *ngFor="let c of data | async" (click)="getServiciosByCategoria(c.id, c.tipoNegocio)" button>      
+        <!--<ion-card-header color="custom2">
+          <ion-card-subtitle>{{ c.descripcion }}</ion-card-subtitle>
+          <ion-card-title class="card-title">{{ c.tipoNegocio }}</ion-card-title>
+        </ion-card-header>
+        <ion-thumbnail class="img-categories">
+          <ion-img [src]="c.imagen" ></ion-img>
+        </ion-thumbnail>-->
+
+        <ion-buttons slot="end">
+          <ion-avatar>
+            {{ c.tipoNegocio }}
+          </ion-avatar>
+        </ion-buttons>
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

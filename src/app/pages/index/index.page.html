@@ -1,0 +1,24 @@
+<!--<app-header [titulo]=titulo></app-header>-->
+
+<ion-content class="background" padding>
+
+  <ion-row class="vertical-align-content">
+    <ion-col>
+      <ion-list>    
+        <ion-item (click)="navegar()" class="ion-item-border" button>
+          <ion-icon slot="start" ios="ios-construct" md="md-construct"></ion-icon>
+          <!--<ion-icon slot="start" ios="ios-create" md="md-create"></ion-icon>-->
+          <ion-label>
+            <h3>Administrar Servicios</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/categories" class="ion-item-border" button>
+          <ion-icon slot="start" ios="ios-apps" md="md-apps"></ion-icon>
+          <ion-label>
+            <h3>Econtrar Servicios</h3>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+  </ion-col>
+  </ion-row>
+</ion-content>

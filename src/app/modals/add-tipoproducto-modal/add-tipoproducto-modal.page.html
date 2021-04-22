@@ -1,0 +1,29 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-title>Enviar Mensaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="inputForm">
+   <!-- <ion-label>Nombre: {{ nombre }}</ion-label>-->
+    <ion-label>Nombre:</ion-label>
+    <ion-input type="text" formControlName="nombre" placeholder="Tipo de producto"></ion-input>
+    <br/>
+    <ion-label>Descripción:</ion-label>
+    <ion-textarea type="text" rows="3" placeholder="Entre una descripcion..." 
+      formControlName="descripcion" ></ion-textarea>
+  </form>  
+  <ion-row class="top-20">
+    <ion-col>
+        <ion-button (click)="nuevoProducto()" class="top-20, tamanio" fill="solid" [disabled]="!inputForm.valid">
+          Enviar
+        </ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button (click)="dismissCancelButton()" class="top-20, tamanio" fill="outline">
+          Cancelar
+        </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

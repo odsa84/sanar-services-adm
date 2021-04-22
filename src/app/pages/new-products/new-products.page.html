@@ -1,0 +1,144 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/lst-products"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Nuevo Producto</ion-title>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="newProdForm">
+    <div padding>
+      <ion-card *ngIf="mainImage !== null">
+        <ion-thumbnail class="img-main">
+          <ion-img [src]="mainImage.path"></ion-img>          
+        </ion-thumbnail>
+      </ion-card>
+      <ion-button slot="end" fill="clear" (click)="deleteImage(mainImage, 1)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>        
+      <ion-button fill="clear" expand="full" (click)="selectImage()">
+        <ion-icon slot="start" name="camera"></ion-icon>Subir imagen
+      </ion-button>
+
+      <!-- SLICE images -->
+
+      <ion-grid *ngIf="carouselImages.length > 0" >
+        <ion-row>
+          <ion-col size="1">
+            <span class="slider-nav arrow-prev" (click)="slidePrev(sliderTwo,slideWithNav)">
+              <div class="prev-icon-custom custon-nav" [class.disabled]="sliderTwo.isBeginningSlide"></div>
+            </span>
+          </ion-col>
+          <ion-col>
+            <!--<ion-button fill="clear" expand="full" (click)="selectImage()">
+              <ion-icon slot="start" name="camera"></ion-icon>Nueva
+            </ion-button>-->
+            <ion-slides pager="false" [options]="slideOptsTwo" #slideWithNav
+              (ionSlideDidChange)="slideDidChange(sliderTwo,slideWithNav)">              
+              <ion-slide *ngFor="let image of carouselImages" (click)="selectMainImage(image)" button>
+                <ion-card>
+                  <ion-thumbnail class="img-categories">
+                    <ion-img [src]="image.path"></ion-img>
+                  </ion-thumbnail>
+                </ion-card>
+              </ion-slide>
+            </ion-slides>    
+          </ion-col>
+          <ion-col size="1">
+            <span class="slider-nav arrow-next" (click)="slideNext(sliderTwo,slideWithNav)">
+              <div class="next-icon-custom custon-nav" [class.disabled]="sliderTwo.isEndSlide"></div>
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- end SLICE images-->
+      
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label slot="end">en Stock</ion-label>
+              <ion-toggle slot="end" (ionChange)="getStock($event)" color="primary" checked></ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-input type="text" formControlName="nombre" placeholder="Nombre del producto"></ion-input>
+
+      <ion-textarea type="text" rows="3" placeholder="Descripcion del producto" formControlName="descripcion">
+      </ion-textarea> 
+      <ion-row>
+        <ion-col size="9">
+          <ion-select (ionChange)="changeTipoProducto($event)" formControlName="tipoProducto" 
+            class="ion-select-db" placeholder="Tipo de producto" [value]="selectedTP">
+            <ion-select-option class="ion-select-option-db" *ngFor="let tp of tipoProductos | async" 
+            [value]="tp">
+              {{ tp.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col size="3">
+          <ion-button (click)="openModal()" *ngIf="showBtn">
+            <ion-icon name="add" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button (click)="showConfirm()" *ngIf="!showBtn">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>        
+    
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-input type="text" formControlName="precio" placeholder="Precio"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input type="text" formControlName="unidadMedida" placeholder="Unidad de medida"></ion-input>
+          </ion-col>
+        </ion-row>  
+        <ion-row>
+          <ion-col>            
+            <ion-input type="text" formControlName="cantidad" placeholder="Cantidad de productos en almacén"></ion-input>
+          </ion-col>
+        </ion-row> 
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>¿Tiene acompañantes?</ion-label>
+              <ion-toggle slot="end" (ionChange)="getAcompanante($event)" color="primary"></ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="showAcomp">
+          <ion-col size="9">
+            <ion-select multiple="true" formControlName="acompanante" 
+              class="ion-select-db" placeholder="Acompañantes" [value]="selectedAcomp">
+              <ion-select-option class="ion-select-option-db" *ngFor="let tp of acompanantes | async" 
+              [value]="tp">
+                {{ tp.nombre }}
+              </ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>{{selectedAcomp}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div padding>
+      <ion-button (click)="enviar()" size="large" expand="block" fill="solid" 
+        [disabled]="!newProdForm.valid">
+        Enviar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

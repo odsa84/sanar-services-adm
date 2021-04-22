@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Modificar Servicio</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <form [formGroup]="editServForm">
+          <div padding>            
+            <h3 *ngIf="images.length == 0" text-center>Please Select Image!</h3>
+            <ion-list>
+              <ion-item *ngFor="let img of images; index as pos" text-wrap>
+                  <ion-img [src]="img.path"></ion-img>
+                  <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                  </ion-button>
+              </ion-item>
+            </ion-list>  
+            <ion-button fill="clear" expand="full" (click)="selectImage()">
+              <ion-icon slot="start" name="camera"></ion-icon>Cambiar imagen
+            </ion-button>
+            <ion-label class="font-weight-light">A cargo de:</ion-label>          
+            <ion-select (ionChange)="changePersona($event)" formControlName="persona"
+             class="ion-select-db">
+              <ion-select-option class="ion-select-option-db" *ngFor="let per of personas | async" 
+              [value]="per.id">
+                {{ per.nombre }}
+                {{ per.apellido }}
+              </ion-select-option>
+            </ion-select>
+            <ion-label>Categoria:</ion-label> 
+            <ion-select (ionChange)="changeCategoria($event)" formControlName="categoria">
+              <ion-select-option *ngFor="let cat of categorias | async" [value]="cat.id">
+                {{ cat.tipoNegocio }}
+              </ion-select-option>
+            </ion-select>
+            <ion-label>Nombre del servicio:</ion-label> 
+            <ion-input type="text" formControlName="nombre" placeholder="nombre del servico"></ion-input>
+            <ion-label>Descripcion:</ion-label> 
+            <ion-textarea type="text" rows="3" placeholder="Descripcion del servicio..." 
+              formControlName="descripcion"></ion-textarea>
+            <ion-label>Sitio web:</ion-label> 
+            <ion-input type="text" formControlName="sitioWeb" placeholder="Url Sitio Web"></ion-input>
+            <ion-label>Creado desde:</ion-label> 
+            <ion-datetime display-format="DD MMM YYYY" formControlName="fechaCreadoNegocio"></ion-datetime>
+            <div style="border-width: 1px; border-color: black">
+              <h3>Datos de localizacion</h3>
+              <div class="w3-code notranslate htmlHigh">
+            <ion-label>Ave principal:</ion-label> 
+            <ion-input type="text" formControlName="callePrincipal" placeholder="Ave. principal"></ion-input>
+            <ion-label>Numero:</ion-label>
+            <ion-input type="text" formControlName="numeracion" placeholder="Nueracion ej: N139-47"></ion-input>
+            <ion-label>Ave secundaria:</ion-label>
+            <ion-input type="text" formControlName="calleSecundaria" placeholder="Ave. secundaria"></ion-input>
+            <ion-label>Provincia:</ion-label>
+            <ion-select (ionChange)="changeProvincia($event)" formControlName="provincia" placeholder="Seleccione la provincia">
+              <ion-select-option *ngFor="let prov of provincias | async" [value]="prov.id">
+                {{ prov.nombre }}
+              </ion-select-option>
+            </ion-select>
+            <ion-label>Ciudad:</ion-label>
+            <ion-select (ionChange)="changeCiudad($event)" formControlName="ciudad"  placeholder="Seleccione la ciudad">
+              <ion-select-option *ngFor="let ciu of ciudades | async" [value]="ciu.id">
+                {{ ciu.nombre }}
+              </ion-select-option>
+            </ion-select>
+            <ion-label>Sector:</ion-label>
+            <ion-select (ionChange)="changeSector($event)" formControlName="sector" placeholder="Seleccione el sector">
+              <ion-select-option *ngFor="let sec of sectores | async" [value]="sec.id">
+                {{ sec.nombre }}
+              </ion-select-option>
+            </ion-select>
+            <ion-label>Detalle adicional:</ion-label>
+            <ion-textarea type="text" rows="3" placeholder="Detalle adicional de la direccion..." 
+            formControlName="detalleAdicional" ></ion-textarea>
+            </div>
+            </div>    
+          </div>
+          <div padding>
+            <ion-button (click)="enviar()" size="large" expand="block" fill="solid" 
+            [disabled]="!editServForm.valid">
+                Enviar
+            </ion-button>
+          </div>
+  </form>
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ nombreSrv.nombre }}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-avatar>
+        <img [src]="nombreSrv.imagen">
+      </ion-avatar>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card mode="ios" color="primary">
+    <ion-card-header>
+        <ion-card-title>Servicio:</ion-card-title>
+      <ion-card-subtitle>{{ nombreSrv.nombre }}</ion-card-subtitle>
+      <ion-card-subtitle>{{ nombreSrv.descripcion }}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{ nombreSrv.callePrincipal }}, 
+      {{ nombreSrv.numeracion }} y
+      {{ nombreSrv.calleSecundaria }}, 
+      {{ nombreSrv.sector.nombre }}, 
+      {{ nombreSrv.sector.ciudad.nombre }}
+    </ion-card-content>
+  </ion-card>
+  <ion-card mode="ios" color="tertiary" (click)="presentActionSheet()"  button>
+      <ion-card-header>
+          <ion-card-title>Persona de contacto:</ion-card-title>
+        <ion-card-subtitle>
+          {{ nombreSrv.persona.nombre }} 
+          {{ nombreSrv.persona.apellido }}
+        </ion-card-subtitle>
+        <ion-card-subtitle>{{ nombreSrv.persona.cedula }}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>{{ nombreSrv.persona.telefono }} / {{ nombreSrv.persona.email }}</ion-card-content>
+    </ion-card>
+</ion-content>

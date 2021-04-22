@@ -1,0 +1,18 @@
+/*ion-item{
+    --background: #3880ff;
+    --color: #fff;
+}*/
+
+ion-button{
+    --background: #062f77;
+}
+.vertical-align-content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100%;
+}
+
+.title {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

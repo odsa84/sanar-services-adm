@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Modificar Producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup]="editProdForm">
+  <div padding>            
+    <h3 *ngIf="images.length == 0" text-center>Please Select Image!</h3>
+    <ion-list>
+      <ion-item *ngFor="let img of images; index as pos" text-wrap>
+          <ion-img [src]="img.path"></ion-img>
+          <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+      </ion-item>
+    </ion-list>  
+    <ion-button fill="clear" expand="full" (click)="selectImage()">
+      <ion-icon slot="start" name="camera"></ion-icon>Cambiar imagen
+    </ion-button>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label slot="end">en Stock</ion-label>
+            <ion-toggle slot="end" (ionChange)="getStock($event)" color="primary" [checked]="toggleChkd"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-label >Nombre del Producto:</ion-label> 
+    <ion-input type="text" formControlName="nombre" placeholder="nombre del servico"></ion-input>
+    <br/>
+    <ion-label>Descripcion:</ion-label> 
+    <ion-textarea type="text" rows="3" placeholder="Descripcion del servicio..." 
+      formControlName="descripcion"></ion-textarea>
+    <br/>
+    <ion-label>Precio:</ion-label> 
+    <ion-input type="text" formControlName="precio" placeholder="Url Sitio Web"></ion-input> 
+    <br/>         
+    <ion-label>Cantidad:</ion-label> 
+    <ion-input type="text" formControlName="cantidad" placeholder="Ave. principal"></ion-input>
+    <br/>
+    <ion-label>Unidad Medida:</ion-label>
+    <ion-input type="text" formControlName="unidadMedida"></ion-input>
+    <br/>
+    <ion-label>Servicio:</ion-label>
+    <ion-select formControlName="servicio" placeholder="Seleccione servicio" disabled="true">
+      <ion-select-option *ngFor="let serv of servicios | async" [value]="serv.id">
+        {{ serv.nombre }}
+      </ion-select-option>
+    </ion-select>
+    <br/>
+    <ion-label>Tipo Producto:</ion-label>
+    <ion-select (ionChange)="changeTipoProducto($event)" formControlName="tipoProducto" 
+    placeholder="Seleccione...">
+      <ion-select-option *ngFor="let tp of tipoProductos | async" [value]="tp.id">
+        {{ tp.nombre }}
+      </ion-select-option>
+    </ion-select>    
+  </div>
+  <div padding>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="enviar()" size="large" expand="block" fill="solid" 
+        [disabled]="!editProdForm.valid">
+            Enviar
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="showConfirm()" size="large" expand="block" fill="solid" 
+          color="danger">
+            Eliminar
+        </ion-button>
+      </ion-col>
+    </ion-row>    
+  </div>
+</form>
+</ion-content>

@@ -1,0 +1,23 @@
+<app-header [titulo]=titulo></app-header>
+
+<ion-content scrollEvents="true">
+    <ion-list>
+        <ion-item *ngFor="let serv of data | async" (click)="detalleServicio(serv)" class="ion-item-border"
+         button>
+          <!--<ion-avatar slot="start">
+              <img [src]="serv.imagen" class="img-avatar">     
+          </ion-avatar>-->
+          <ion-thumbnail slot="start" class="img-services">
+            <ion-img [src]="serv.imagen" class="img-avatar"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>{{ serv.nombre }}</h3>
+            <p>{{ serv.descripcion }}</p>
+            <ion-label slot="end" text-right>
+                {{ serv.sector.nombre }},
+                {{ serv.sector.ciudad.nombre }}
+            </ion-label>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+</ion-content>

@@ -1,0 +1,42 @@
+<app-header titulo="Crear Cuenta"></app-header>
+<ion-content>
+    <form [formGroup]="registerForm">
+        <ion-grid>
+            <ion-row justify-content-center>
+                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                  <div text-center>
+                    
+                  </div>
+                  <div padding>
+                      <ion-item>
+                        <ion-input type="text" formControlName="nombre" placeholder="nombres"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input type="text" formControlName="apellido" placeholder="apellidos"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input type="text" formControlName="cedula" placeholder="cedula"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input type="text" formControlName="telefono" placeholder="telefono ej: 0999999999"></ion-input>
+                      </ion-item>
+                    <ion-item>
+                      <ion-input type="email" formControlName="email" placeholder="your@email.com"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-input type="password" formControlName="password" placeholder="password"></ion-input>
+                    </ion-item> 
+                    <ion-item>
+                        <ion-input type="password" formControlName="confirm_password" placeholder="confirme el password"></ion-input>
+                      </ion-item>     
+                  </div>
+                  <div padding>
+                    <ion-button (click)="enviar()" size="large" expand="block" fill="solid" [disabled]="!registerForm.valid">
+                        Enviar
+                    </ion-button>
+                  </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+      </form>
+</ion-content>

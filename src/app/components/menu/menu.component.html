@@ -1,0 +1,30 @@
+<ion-menu contentId="content" side="start" menuId="admMenu">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-avatar>
+            <img src="../assets/shapes.svg">
+          </ion-avatar>
+        </ion-buttons>
+        <ion-title>{{ menuTitle }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="crearServicio()">
+          <ion-icon slot="start" ios="ios-add" md="md-add"></ion-icon>
+          Nuevo servicio
+
+        </ion-item>
+        <ion-item (click)="crearAcompanante()">
+          <ion-icon slot="start" ios="ios-add" md="md-add"></ion-icon>
+          Nuevo Acompañante
+
+        </ion-item>
+        <ion-item (click)="logout()">
+            <ion-icon name="log-out" slot="start" (click)="logout()"></ion-icon>
+            Cerrar sesion
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>

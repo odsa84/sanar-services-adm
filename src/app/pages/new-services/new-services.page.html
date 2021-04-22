@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Nuevo Servicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="newServForm">
+    <div padding>
+      <ion-card *ngIf="mainImage !== null">
+        <ion-thumbnail class="img-main">
+          <ion-img [src]="mainImage.path"></ion-img>          
+        </ion-thumbnail>
+      </ion-card>
+      <ion-button slot="end" fill="clear" (click)="deleteImage(mainImage, 1)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>        
+      <ion-button fill="clear" expand="full" (click)="selectImage()">
+        <ion-icon slot="start" name="camera"></ion-icon>Subir imagen
+      </ion-button>
+
+      <!-- SLICE images -->
+
+      <ion-grid *ngIf="carouselImages.length > 0" >
+        <ion-row>
+          <ion-col size="1">
+            <span class="slider-nav arrow-prev" (click)="slidePrev(sliderTwo,slideWithNav)">
+              <div class="prev-icon-custom custon-nav" [class.disabled]="sliderTwo.isBeginningSlide"></div>
+            </span>
+          </ion-col>
+          <ion-col>
+            <!--<ion-button fill="clear" expand="full" (click)="selectImage()">
+              <ion-icon slot="start" name="camera"></ion-icon>Nueva
+            </ion-button>-->
+            <ion-slides pager="false" [options]="slideOptsTwo" #slideWithNav
+              (ionSlideDidChange)="slideDidChange(sliderTwo,slideWithNav)">              
+              <ion-slide *ngFor="let image of carouselImages" (click)="selectMainImage(image)" button>
+                <ion-card>
+                  <ion-thumbnail class="img-categories">
+                    <ion-img [src]="image.path"></ion-img>
+                  </ion-thumbnail>
+                </ion-card>
+              </ion-slide>
+            </ion-slides>    
+          </ion-col>
+          <ion-col size="1">
+            <span class="slider-nav arrow-next" (click)="slideNext(sliderTwo,slideWithNav)">
+              <div class="next-icon-custom custon-nav" [class.disabled]="sliderTwo.isEndSlide"></div>
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- end SLICE images-->
+
+      <ion-label class="font-weight-light">A cargo de:</ion-label>
+      <ion-select (ionChange)="changePersona($event)" formControlName="persona" class="ion-select-db">
+        <ion-select-option class="ion-select-option-db" *ngFor="let per of personas | async" [value]="per.id">
+          {{ per.nombre }}
+          {{ per.apellido }}
+        </ion-select-option>
+      </ion-select>
+      <ion-label>Categoria:</ion-label>
+      <ion-select (ionChange)="changeCategoria($event)" formControlName="categoria">
+        <ion-select-option *ngFor="let cat of categorias | async" [value]="cat">
+          {{ cat.tipoNegocio }}
+        </ion-select-option>
+      </ion-select>
+      <ion-label>Nombre del servicio:</ion-label>
+      <ion-input type="text" formControlName="nombre" placeholder="nombre del servico"></ion-input>
+      <ion-label>Descripcion:</ion-label>
+      <ion-textarea type="text" rows="3" placeholder="Descripcion del servicio..." formControlName="descripcion">
+      </ion-textarea>
+      <ion-label>Sitio web:</ion-label> 
+      <ion-input type="text" formControlName="sitioWeb" placeholder="Url Sitio Web"></ion-input>
+      <ion-label>Creado desde:</ion-label>
+      <ion-datetime display-format="DD MMM YYYY" formControlName="fechaCreadoNegocio"></ion-datetime>
+      <div style="border-width: 1px; border-color: black">
+        <ion-item-divider>
+          <ion-label>
+            <h1>Datos de localizacion</h1>
+          </ion-label>
+        </ion-item-divider>
+        <br/>
+        <div class="w3-code notranslate htmlHigh">
+          <ion-label>Ave principal:</ion-label>
+          <ion-input type="text" formControlName="callePrincipal" placeholder="Ave. principal"></ion-input>
+          <ion-label>Numero:</ion-label>
+          <ion-input type="text" formControlName="numeracion" placeholder="Numeracion ej: N139-47"></ion-input>
+          <ion-label>Ave secundaria:</ion-label>
+          <ion-input type="text" formControlName="calleSecundaria" placeholder="Ave. secundaria"></ion-input>
+          <ion-label>Provincia:</ion-label>
+          <ion-select (ionChange)="changeProvincia($event)" formControlName="provincia"
+            placeholder="Seleccione la provincia">
+            <ion-select-option *ngFor="let prov of provincias | async" [value]="prov.id">
+              {{ prov.nombre }}
+            </ion-select-option>
+          </ion-select>
+          <ion-label>Ciudad:</ion-label>
+          <ion-select (ionChange)="changeCiudad($event)" formControlName="ciudad" placeholder="Seleccione la ciudad">
+            <ion-select-option *ngFor="let ciu of ciudades | async" [value]="ciu.id">
+              {{ ciu.nombre }}
+            </ion-select-option>
+          </ion-select>
+          <ion-label>Sector:</ion-label>
+          <ion-select (ionChange)="changeSector($event)" formControlName="sector" placeholder="Seleccione el sector">
+            <ion-select-option *ngFor="let sec of sectores | async" [value]="sec.id">
+              {{ sec.nombre }}
+            </ion-select-option>
+          </ion-select>
+          <ion-label>Detalle adicional:</ion-label>
+          <ion-textarea type="text" rows="3" placeholder="Informacion adicional sobre el negocio..."
+            formControlName="detalleAdicional"></ion-textarea>
+        </div>
+      </div>
+    </div>
+    <div padding>
+      <ion-button (click)="enviar()" size="large" expand="block" fill="solid" 
+        [disabled]="!newServForm.valid">
+        Enviar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
